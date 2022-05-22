@@ -118,9 +118,10 @@ def locateApple():
 root = tk.Tk()
 root.title("Snake")
 root.bind("<Key>", on_key_pressed)
+root.geometry("800x600")
 
 canvas = tk.Canvas(background="black", width=300, height=300)
-canvas.pack()
+canvas.pack(expand=tk.YES, fill=tk.BOTH)
 
 # load images
 imgDot = ImageTk.PhotoImage(file="dot.png")
