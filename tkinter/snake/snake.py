@@ -7,6 +7,8 @@ import sys
 # Apple location should be n*DOT_SIZE
 
 DOT_SIZE=10
+WIDTH=400
+HEIGHT=400
 
 gameOver = False
 moveX = DOT_SIZE
@@ -84,7 +86,7 @@ def checkDead():
                 gameOver = True 
 
     # hit wall
-    if x1 < 0 or  x1 > 290 or y1<0 or y1>290:
+    if x1 < 0 or  x1 > WIDTH-DOT_SIZE or y1<0 or y1>HEIGHT-DOT_SIZE:
         gameOver = True
 def drawScore():
     txtScore = canvas.find_withtag("score")
@@ -110,17 +112,16 @@ def locateApple():
     if(len(apple) > 0):
         canvas.delete(apple[0])
         
-    x = random.randint(0,27) * DOT_SIZE
-    y = random.randint(0,27) * DOT_SIZE
+    x = random.randint(0,WIDTH//DOT_SIZE-3) * DOT_SIZE
+    y = random.randint(0,HEIGHT//DOT_SIZE-3) * DOT_SIZE
     canvas.create_image(x,y, image=imgApple,anchor=tk.NW, tag="apple")
     
 root = tk.Tk()
 root.title("Snake")
 root.bind("<Key>", on_key_pressed)
-root.geometry("800x600")
 
-canvas = tk.Canvas(background="black", width=300, height=300)
-canvas.pack(expand=tk.YES, fill=tk.BOTH)
+canvas = tk.Canvas(background="black", width=WIDTH, height=HEIGHT)
+canvas.pack(expand=tk.NO, fill=tk.BOTH)
 
 # load images
 imgDot = tk.PhotoImage(file="dot.png")
