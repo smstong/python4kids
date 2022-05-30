@@ -113,3 +113,5 @@ O = [
         'oo',
     ],
 ]
+
+shapeList = [I, J, L, T, S, Z, O]
