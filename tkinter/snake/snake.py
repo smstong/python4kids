@@ -1,5 +1,4 @@
 import tkinter as tk
-from PIL import ImageTk
 import random
 import sys
 
@@ -124,9 +123,9 @@ canvas = tk.Canvas(background="black", width=300, height=300)
 canvas.pack(expand=tk.YES, fill=tk.BOTH)
 
 # load images
-imgDot = ImageTk.PhotoImage(file="dot.png")
-imgHead = ImageTk.PhotoImage(file="head.png")
-imgApple = ImageTk.PhotoImage(file="apple.png")
+imgDot = tk.PhotoImage(file="dot.png")
+imgHead = tk.PhotoImage(file="head.png")
+imgApple = tk.PhotoImage(file="apple.png")
 
 # draw snake
 canvas.create_image(50,50, image=imgHead, anchor=tk.NW, tag="head")
