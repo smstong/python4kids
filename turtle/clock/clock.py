@@ -1,5 +1,5 @@
 import turtle
-import time
+import datetime
 import math
 
 turtle.mode('logo') # clockwise, must be called at first
@@ -71,7 +71,7 @@ def draw_face():
 
     
 def update_clock():
-    t = time.localtime()
+    t = datetime.datetime.today()
 
     draw_hand_sec(t)
     draw_hand_hour(t)
@@ -79,16 +79,16 @@ def update_clock():
     draw_digital(t)
     turtle.update() # redraw screen
     
-    turtle.ontimer(update_clock, 1000)
+    turtle.ontimer(update_clock, 100)
 
 def draw_digital(t):
     digitalPen.goto(0, 0)
     digitalPen.clear()
-    digitalPen.write('%d-%d-%d %d:%d:%s' % (t.tm_year, t.tm_mon, t.tm_mday, t.tm_hour, t.tm_min, t.tm_sec),
+    digitalPen.write('%d-%d-%d %02d:%02d:%02d' % (t.year, t.month, t.day, t.hour, t.minute, t.second),
                      align='center', font=('Arial', 20, 'bold'))
     
 def draw_hand_sec(t):
-    angle = t.tm_sec*6
+    angle = (t.second + t.microsecond/1000000)*6
     secHand.clear()
     secHand.goto(0,0)
     secHand.setheading(angle)
@@ -97,7 +97,7 @@ def draw_hand_sec(t):
     secHand.up()
     
 def draw_hand_min(t):
-    angle = (t.tm_min + t.tm_sec/60) * 6
+    angle = (t.minute + t.second/60) * 6
     minHand.clear()
     minHand.goto(0,0)
     minHand.setheading(angle)
@@ -106,14 +106,14 @@ def draw_hand_min(t):
     minHand.up()
     
 def draw_hand_hour(t):
-    angle = (t.tm_hour + t.tm_min/60 + t.tm_sec/3600) * 30
+    angle = (t.hour + t.minute/60 + t.second/3600) * 30
     hourHand.clear()
     hourHand.goto(0,0)
     hourHand.setheading(angle)
     hourHand.down()
     hourHand.forward(170)
     hourHand.up()
-
+        
 def main():
     screen = turtle.Screen()
     screen.setup(width=500, height=500)
