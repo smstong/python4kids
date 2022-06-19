@@ -17,7 +17,7 @@ facePen.ht()
 
 digitalPen.ht()
 digitalPen.speed(0)
-digitalPen.color('white')
+digitalPen.color('red')
 digitalPen.up()
 
 secHand.up()
@@ -41,9 +41,12 @@ hourHand.shape('arrow')
 
 def draw_face():
     facePen.goto(220,0)
-    facePen.pensize(10)
+    facePen.pensize(2)
     facePen.down()
-    facePen.circle(220)
+    facePen.fillcolor('yellow')
+    facePen.begin_fill()
+    facePen.circle(220, steps=1000)
+    facePen.end_fill()
     facePen.up()
 
     facePen.setheading(0)
@@ -82,18 +85,20 @@ def update_clock():
     turtle.ontimer(update_clock, 100)
 
 def draw_digital(t):
-    digitalPen.goto(0, 0)
+    digitalPen.goto(0, 50)
     digitalPen.clear()
     digitalPen.write('%d-%d-%d %02d:%02d:%02d' % (t.year, t.month, t.day, t.hour, t.minute, t.second),
-                     align='center', font=('Arial', 20, 'bold'))
+                     align='center', font=('Arial', 16, 'bold'))
     
 def draw_hand_sec(t):
     angle = (t.second + t.microsecond/1000000)*6
     secHand.clear()
     secHand.goto(0,0)
     secHand.setheading(angle)
+    secHand.backward(20)
     secHand.down()
-    secHand.forward(200)
+    secHand.forward(220)
+    
     secHand.up()
     
 def draw_hand_min(t):
@@ -101,6 +106,7 @@ def draw_hand_min(t):
     minHand.clear()
     minHand.goto(0,0)
     minHand.setheading(angle)
+    minHand.backward(20)
     minHand.down()
     minHand.forward(180)
     minHand.up()
@@ -110,8 +116,9 @@ def draw_hand_hour(t):
     hourHand.clear()
     hourHand.goto(0,0)
     hourHand.setheading(angle)
+    hourHand.backward(20)
     hourHand.down()
-    hourHand.forward(170)
+    hourHand.forward(160)
     hourHand.up()
         
 def main():
